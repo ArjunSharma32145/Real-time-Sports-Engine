@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+const isoDateString = z.iso.datetime();
+
 export const MATCH_STATUS = {
   SCHEDULED: 'scheduled',
   LIVE: 'live',
@@ -14,10 +16,6 @@ export const matchIdParamSchema = z.object({
   id: z.coerce.number().int().positive(),
 });
 
-const isoDateString = z.string().refine(
-  (val) => !isNaN(Date.parse(val)),
-  { message: 'Invalid ISO date string' }
-);
 
 export const createMatchSchema = z.object({
   sport: z.string().min(1, 'Sport is required'),
