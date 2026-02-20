@@ -63,6 +63,11 @@ commentaryRouter.post('/', async (req, res) => {
 
     // Insert into commentary table
     const [result] = await db.insert(commentary).values(insertData).returning();
+
+    if(res.app.locals.broadcastCommentary){
+      res.app.locals.broadcastCommentary(result.matchId,result);
+    }
+    
     res.status(201).json(result);
   } catch (err) {
     console.error(err);
