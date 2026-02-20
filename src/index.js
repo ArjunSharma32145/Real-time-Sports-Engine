@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import http from 'http';
 import 'dotenv/config';
 import { attachWebSocketServer } from "./ws/server.js";
@@ -11,6 +12,7 @@ const PORT = Number(process.env.PORT ||8000 );
 const HOST = process.env.HOST || '0.0.0.0';
 
 const server = http.createServer(app);
+app.use(cors());
 app.use(express.json());
 
 app.get('/' , (req,res) => {
