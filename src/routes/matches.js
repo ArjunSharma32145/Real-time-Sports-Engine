@@ -19,7 +19,7 @@ matchRouter.get('/', async (req,res) => {
   }
 
   const limit = Math.min(parsed.data.limit ?? 50, MAX_LIMIT);
-
+ 
   try{
      const data = await db.select().from(matches).orderBy((desc(matches.createdAt))).limit(limit)
 
